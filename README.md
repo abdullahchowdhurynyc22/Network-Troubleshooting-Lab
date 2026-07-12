@@ -1,69 +1,139 @@
-# Network-Troubleshooting-Lab
+# Enterprise Network Troubleshooting Lab
 
+A hands-on enterprise networking lab that demonstrates structured troubleshooting in a simulated business environment.
 
-## Project Overview
-This lab demonstrates hands-on, structured troubleshooting across Windows and Linux systems in a small business network. It covers diagnosing and resolving common operational issues like slow performance, network connectivity drops, and remote access failures.
+The goal of this project was to diagnose and resolve DNS and hostname resolution issues while verifying that the rest of the network infrastructure was functioning correctly.
 
 ---
 
 ## Lab Environment
-* **Domain Name:** lab.local
-* **Subnet:** 192.168.10.0/24
 
-| Device Name | Operating System | IP Address | Role / Function |
-| :--- | :--- | :--- | :--- |
-| pfSense | pfSense Firewall | 192.168.10.1 | Default Gateway |
-| WIN11-CLI-A | Windows 11 | 192.168.10.10 | Client Workstation |
-| DC01 | Windows Server 2025 | 192.168.10.20 | Domain Controller / DNS / DHCP |
-| UBUNTU-SRV | Ubuntu Server | 192.168.10.30 | Remote Server |
-| UBUNTU-DSK | Ubuntu Desktop | 192.168.10.40 | Linux Client Workstation |
+| Device | Role | IP Address |
+|---------|------|------------|
+| pfSense Firewall | Gateway / Firewall | 192.168.10.1 |
+| Windows Server 2025 | Active Directory / DNS | 192.168.10.20 |
+| Windows 11 Client | Workstation | 192.168.10.10 |
+| Ubuntu Server | Linux Server | 192.168.10.30 |
+| Ubuntu Desktop | Linux Workstation | 192.168.10.40 |
+
+**Domain:** `lab.local`
+
+**Virtualization:** UTM
 
 ---
 
 ## Technologies Used
-* Windows Server 2025 (Active Directory, DNS, DHCP)
-* Windows 11 & Ubuntu Linux (Server/Desktop)
-* pfSense Firewall
-* SSH & UTM Virtualization
+
+- Windows Server 2025
+- Active Directory
+- DNS
+- Windows 11
+- Ubuntu Server
+- Ubuntu Desktop
+- pfSense Firewall
+- TCP/IP Networking
 
 ---
 
-## Troubleshooting Scenarios
+## Problem
 
-### 1. Windows Client Performance Issue
-Investigated a slow system by analyzing resource usage in Task Manager and reviewing logs in Event Viewer.
+The Windows client could reach other devices on the network, but DNS wasn't working.
 
-### 2. DNS Resolution Failure
-* **Problem:** External websites wouldn't load (`nslookup google.com` timed out), but local network systems worked.
-* **Root Cause:** The client automatically prioritized an unconfigured IPv6 link-local DNS address from the gateway.
-* **Resolution:** Disabled IPv6 on the client network adapter, forcing traffic to use the internal AD DNS server (`192.168.10.20`).
+### Symptoms
 
-### 3. DHCP Service Verification
-Checked the DHCP service state on the Windows Server to ensure IP leases were being handed out properly to clients.
+- `nslookup google.com` failed
+- Websites would not load by name
+- Internal hostnames could not be resolved
+- Ping by IP address worked normally
 
-### 4. Remote Server Support via SSH
-Established remote command-line access to the Ubuntu Server and verified that the SSH service was running securely.
-
-### 5. Security and Final Validation
-Verified firewall protection rules and confirmed network-wide functionality after all fixes were applied.
+This showed that the network was working, but DNS was not.
 
 ---
 
-## Screenshots
+## Troubleshooting Steps
 
-### Lab Overview
+- Verified IP configuration
+- Tested network connectivity
+- Confirmed gateway access
+- Verified the DNS server was online
+- Reviewed firewall status
+- Checked routing
+- Tested DNS resolution
+- Verified Linux network connectivity
+- Reviewed DNS forwarders
+- Identified the incorrect DNS configuration
+- Applied the fix
+- Tested everything again
 
-### Windows Performance Troubleshooting
+---
 
-### DNS Troubleshooting
+## Root Cause
 
-### DHCP Verification
+The Windows client was using the wrong DNS server.
 
-### Remote Support
+**Incorrect DNS**
 
+```
+192.168.10.99
+```
 
+Because of this:
 
+- External DNS failed
+- Internal hostname resolution failed
+- Websites could not be reached by name
 
-### Security and Final Validation
+During testing, I also found that the Ubuntu Server didn't have a DNS host record.
 
+I created a new DNS record:
+
+```
+Hostname: ubuntusrv
+IP Address: 192.168.10.30
+```
+
+---
+
+## Resolution
+
+Updated the Windows client's DNS settings.
+
+**Correct DNS Configuration**
+
+```
+Preferred DNS: 192.168.10.20
+Alternate DNS: 8.8.8.8
+```
+
+Also:
+
+- Verified DNS forwarders
+- Confirmed pfSense connectivity
+- Added the missing Ubuntu DNS record
+
+---
+
+## Validation
+
+After the changes:
+
+- ✅ `nslookup google.com` worked
+- ✅ `ping google.com` worked
+- ✅ `ping ubuntusrv` worked
+- ✅ Internal hostname resolution worked
+- ✅ External DNS worked
+- ✅ Network connectivity was fully restored
+
+---
+
+## Skills Demonstrated
+
+- Enterprise network troubleshooting
+- DNS troubleshooting
+- Windows networking
+- Linux networking
+- Active Directory DNS
+- Firewall verification
+- Root cause analysis
+- Network validation
 
