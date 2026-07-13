@@ -137,3 +137,40 @@ After the changes:
 - Root cause analysis
 - Network validation
 
+# Lab Baseline
+<br><img width="406" height="659" alt="Image" src="https://github.com/user-attachments/assets/46026722-5735-4589-9be3-5c9fac6fd8cb" /></br>
+
+<br><img width="420" height="318" alt="Image" src="https://github.com/user-attachments/assets/834bb3b1-1958-4590-bbde-2f41f6856dfa" /></br>
+
+
+---
+
+# Problem Reproduction
+<br><img width="413" height="453" alt="Image" src="https://github.com/user-attachments/assets/6766dbf1-9a88-4e53-b52b-7741755e9bf3" /></br>
+
+<br><img width="412" height="309" alt="Image" src="https://github.com/user-attachments/assets/bce2834b-fda1-4db0-855c-323a641365ef" /></br>
+
+
+---
+
+# Diagnostic Investigation
+<br><img width="405" height="612" alt="Image" src="https://github.com/user-attachments/assets/d747a287-4de2-46c8-ba74-ce7fc59741d0" /></br>
+
+<br><img width="412" height="256" alt="Image" src="https://github.com/user-attachments/assets/46b42d0a-dfca-4835-94ec-65cd874cd245" /></br>
+
+
+---
+
+# Infrastructure Verification
+
+<br><img width="407" height="625" alt="Image" src="https://github.com/user-attachments/assets/a871c513-6511-41c1-9fe3-9470d8690030" /><br>
+
+<br><img width="412" height="307" alt="Image" src="https://github.com/user-attachments/assets/5333ab78-52cd-485d-ab15-9292faf6c807" /></br>
+
+---
+
+# Root Cause and Resolution
+<br><img width="408" height="611" alt="Image" src="https://github.com/user-attachments/assets/246ac7c6-c31e-4a0f-bdf2-485c4f035e11" /></br>
+
+
+<br><img width="379" height="350" alt="Image" src="https://github.com/user-attachments/assets/e2a56045-e356-4a4d-8713-4c4db0fc4b81" /></br>
